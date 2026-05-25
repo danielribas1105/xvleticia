@@ -1,11 +1,11 @@
-import { createMessage } from "@/services/messages/create-message"
+import { useCreateMessage } from "@/hooks/messages/use-create-message"
 import { useState } from "react"
 import { toast } from "sonner"
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
+import { Input } from "../ui/input"
+import { Textarea } from "../ui/textarea"
 
 export default function MessageForm() {
-	const [isLoading, setIsLoading] = useState(false)
+	const { mutateAsync, isPending } = useCreateMessage()
 
 	const [form, setForm] = useState({
 		name: "",
@@ -19,15 +19,8 @@ export default function MessageForm() {
 
 	async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		console.log("name", form.name)
-		console.log("email", form.email)
-		console.log("message", form.message)
 		try {
-			await createMessage({
-				name: form.name,
-				email: form.email,
-				message: form.message,
-			})
+			await mutateAsync(form)
 
 			toast.success(
 				"Mensagem enviada com sucesso. Em breve estará na galeria de mensagens. 🎉",
@@ -53,7 +46,7 @@ export default function MessageForm() {
 						value={form.name}
 						className="rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] outline-none transition"
 						onChange={(e) => handleChange("name", e.target.value)}
-						disabled={isLoading}
+						disabled={isPending}
 						required
 					/>
 					<Input
@@ -62,7 +55,7 @@ export default function MessageForm() {
 						value={form.email}
 						className="rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] outline-none transition"
 						onChange={(e) => handleChange("email", e.target.value)}
-						disabled={isLoading}
+						disabled={isPending}
 						required
 					/>
 				</div>
@@ -72,14 +65,15 @@ export default function MessageForm() {
 					className="mt-6 rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] outline-none transition"
 					value={form.message}
 					onChange={(e) => handleChange("message", e.target.value)}
-					disabled={isLoading}
+					disabled={isPending}
 					required
 				/>
 				<button
 					className="mt-6 rounded-2xl bg-[#8B0D1E] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#a70f24] hover:shadow-2xl"
 					type="submit"
+					disabled={isPending}
 				>
-					Enviar Mensagem
+					{isPending ? "Enviando..." : "Enviar mensagem"}
 				</button>
 			</div>
 		</form>
