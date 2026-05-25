@@ -1,6 +1,6 @@
 "use client"
 import Footer from "@/components/layout/footer"
-import Messages from "@/components/messages-section"
+import Messages from "@/components/messages/messages-section"
 import { gallery } from "@/constants/Gallery"
 import { gifts } from "@/constants/Gifts"
 import Image from "next/image"

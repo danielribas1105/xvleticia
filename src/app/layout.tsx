@@ -3,6 +3,7 @@ import { Ballet, Cardo, Charm, Roboto } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
+import QueryProvider from "@/providers/query-provider"
 
 const charm = Charm({
 	weight: ["400", "700"],
@@ -52,8 +53,10 @@ export default function RootLayout({
 			)}
 		>
 			<body className="min-h-full flex flex-col">
-				{children}
-				<Toaster />
+				<QueryProvider>
+					{children}
+					<Toaster />
+				</QueryProvider>
 			</body>
 		</html>
 	)
