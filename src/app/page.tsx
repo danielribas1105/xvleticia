@@ -1,14 +1,38 @@
+"use client"
 import { BackgroundMusic } from "@/components/background-music"
 import Footer from "@/components/layout/footer"
 import { gallery } from "@/constants/Gallery"
 import { gifts } from "@/constants/Gifts"
 import { messages } from "@/constants/Messages"
+import { createMessage } from "@/services/messages/create-message"
+import { getMessages } from "@/services/messages/get-messages"
 import Image from "next/image"
+import { useEffect } from "react"
 
 export default function Home() {
+	useEffect(() => {
+		async function test() {
+			const messages = await getMessages()
+
+			console.log("Messages", messages)
+		}
+
+		test()
+	}, [])
+
+	async function handleCreate() {
+		await createMessage({
+			name: "Verônica",
+			email: "veronica@teste.com",
+			message: "Que seu dia seja maravilhoso! Felicidades!!!",
+		})
+
+		alert("Mensagem criada")
+	}
+
 	return (
 		<>
-			<BackgroundMusic />
+			{/* <BackgroundMusic /> */}
 			<main className="min-h-screen bg-[#F6EAD1] text-[#3B1F1F] overflow-hidden">
 				<section className="relative flex min-h-screen items-center justify-center px-6 pt-4 pb-10">
 					<div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(212,175,55,0.35),_transparent_45%),linear-gradient(to_bottom,rgba(139,13,30,0.15),transparent)]" />
@@ -292,7 +316,10 @@ export default function Home() {
 								className="mt-6 w-full rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] px-5 py-4 outline-none transition focus:border-[#D4AF37]"
 							/>
 
-							<button className="mt-6 rounded-2xl bg-[#8B0D1E] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#a70f24] hover:shadow-2xl">
+							<button
+								className="mt-6 rounded-2xl bg-[#8B0D1E] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#a70f24] hover:shadow-2xl"
+								onClick={handleCreate}
+							>
 								Enviar Mensagem
 							</button>
 						</div>
