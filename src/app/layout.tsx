@@ -1,14 +1,8 @@
 import type { Metadata } from "next"
-import {
-	Ballet,
-	Cardo,
-	Charm,
-	Geist,
-	Geist_Mono,
-	Roboto,
-} from "next/font/google"
+import { Ballet, Cardo, Charm, Roboto } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 
 const charm = Charm({
 	weight: ["400", "700"],
@@ -46,7 +40,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html
-			lang="en"
+			lang="pt-BR"
 			className={cn(
 				"h-full",
 				"antialiased",
@@ -57,7 +51,10 @@ export default function RootLayout({
 				cardo.variable,
 			)}
 		>
-			<body className="min-h-full flex flex-col">{children}</body>
+			<body className="min-h-full flex flex-col">
+				{children}
+				<Toaster />
+			</body>
 		</html>
 	)
 }
