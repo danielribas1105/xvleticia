@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase/client"
+import { Message } from "@/schemas/message"
 
-export async function getMessages() {
+export async function getMessages(): Promise<Message[]> {
 	const { data, error } = await supabase
 		.from("messages")
 		.select("*")
@@ -10,5 +11,5 @@ export async function getMessages() {
 		throw new Error(error.message)
 	}
 
-	return data
+	return data ?? []
 }

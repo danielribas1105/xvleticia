@@ -1,35 +1,11 @@
 "use client"
-import { BackgroundMusic } from "@/components/background-music"
 import Footer from "@/components/layout/footer"
+import Messages from "@/components/messages-section"
 import { gallery } from "@/constants/Gallery"
 import { gifts } from "@/constants/Gifts"
-import { messages } from "@/constants/Messages"
-import { createMessage } from "@/services/messages/create-message"
-import { getMessages } from "@/services/messages/get-messages"
 import Image from "next/image"
-import { useEffect } from "react"
 
 export default function Home() {
-	useEffect(() => {
-		async function test() {
-			const messages = await getMessages()
-
-			console.log("Messages", messages)
-		}
-
-		test()
-	}, [])
-
-	async function handleCreate() {
-		await createMessage({
-			name: "Verônica",
-			email: "veronica@teste.com",
-			message: "Que seu dia seja maravilhoso! Felicidades!!!",
-		})
-
-		alert("Mensagem criada")
-	}
-
 	return (
 		<>
 			{/* <BackgroundMusic /> */}
@@ -254,78 +230,7 @@ export default function Home() {
 						</div>
 					</div>
 				</section>
-
-				<section className="relative bg-gradient-to-b from-[#F6EAD1] to-[#EFD8A5] px-6 py-24">
-					<div className="mx-auto max-w-7xl">
-						<div className="mb-16 text-center">
-							<span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#8B0D1E]">
-								Mensagens
-							</span>
-
-							<h2 className="mt-4 text-4xl font-serif text-[#8B0D1E] md:text-5xl">
-								Deixe um recado especial
-							</h2>
-
-							<p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-[#6A4A4A]">
-								Compartilhe carinho, lembranças e votos para essa nova fase da
-								vida da Leticia.
-							</p>
-						</div>
-
-						<div className="grid gap-8 lg:grid-cols-3">
-							{messages.map((message) => (
-								<div
-									key={message.name}
-									className="rounded-4xl border border-white/50 bg-white/70 p-8 shadow-xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-								>
-									<div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37]/20 text-3xl">
-										💌
-									</div>
-
-									<p className="text-lg leading-relaxed text-[#5A3A3A]">
-										“{message.text}”
-									</p>
-
-									<div className="mt-8 border-t border-[#D4AF37]/20 pt-4">
-										<p className="font-semibold text-[#8B0D1E]">
-											{message.name}
-										</p>
-									</div>
-								</div>
-							))}
-						</div>
-
-						<div className="mt-16 rounded-4xl border border-[#D4AF37]/20 bg-white/80 p-10 shadow-2xl backdrop-blur-sm">
-							<div className="grid gap-6 md:grid-cols-2">
-								<input
-									type="text"
-									placeholder="Seu nome"
-									className="rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] px-5 py-4 outline-none transition focus:border-[#D4AF37]"
-								/>
-
-								<input
-									type="email"
-									placeholder="Seu e-mail"
-									className="rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] px-5 py-4 outline-none transition focus:border-[#D4AF37]"
-								/>
-							</div>
-
-							<textarea
-								placeholder="Escreva sua mensagem para a Leticia..."
-								rows={6}
-								className="mt-6 w-full rounded-2xl border border-[#D4AF37]/20 bg-[#FFFDF8] px-5 py-4 outline-none transition focus:border-[#D4AF37]"
-							/>
-
-							<button
-								className="mt-6 rounded-2xl bg-[#8B0D1E] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#a70f24] hover:shadow-2xl"
-								onClick={handleCreate}
-							>
-								Enviar Mensagem
-							</button>
-						</div>
-					</div>
-				</section>
-
+				<Messages />
 				<Footer />
 			</main>
 		</>
