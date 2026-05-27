@@ -1,4 +1,6 @@
 "use client"
+import { Hero } from "@/components/animations/hero"
+import MagicFloating from "@/components/animations/magic-floating"
 import Footer from "@/components/layout/footer"
 import Messages from "@/components/messages/messages-section"
 import { gallery } from "@/constants/Gallery"
@@ -32,6 +34,8 @@ export default function Home() {
 									repleto de emoções, música, memórias e momentos inesquecíveis.
 								</p>
 							</div>
+							{/* <Hero />
+							<MagicFloating /> */}
 
 							<div className="flex flex-wrap gap-4">
 								<a
