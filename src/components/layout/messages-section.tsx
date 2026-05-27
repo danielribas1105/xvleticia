@@ -1,12 +1,13 @@
 "use client"
+import SectionContent from "../layout/section-content"
 import SectionPage from "../layout/section-page"
-import MessageForm from "./message-form"
-import MessagesList from "./messages-list"
+import MessageForm from "../messages/message-form"
+import MessagesList from "../messages/messages-list"
 
-export default function Messages() {
+export default function MessagesSection() {
 	return (
 		<SectionPage className="bg-linear-to-b from-[#F6EAD1] to-[#EFD8A5] px-6 py-24">
-			<div className="mx-auto max-w-7xl">
+			<SectionContent>
 				<div className="mb-16 text-center">
 					<span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#8B0D1E]">
 						Mensagens
@@ -23,7 +24,7 @@ export default function Messages() {
 				</div>
 				<MessagesList />
 				<MessageForm />
-			</div>
+			</SectionContent>
 		</SectionPage>
 	)
 }

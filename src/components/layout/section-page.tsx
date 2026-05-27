@@ -1,14 +1,19 @@
 import { ReactNode } from "react"
 
 interface SectionPageProps {
+	id?: string
 	className?: string
 	children: ReactNode
 }
 
-export default function SectionPage(props: SectionPageProps) {
+export default function SectionPage({
+	id,
+	className,
+	children,
+}: SectionPageProps) {
 	return (
-		<section className={`relative w-full ${props.className} overflow-hidden`}>
-			{props.children}
+		<section id={id} className={`relative w-full overflow-hidden ${className}`}>
+			{children}
 		</section>
 	)
 }
